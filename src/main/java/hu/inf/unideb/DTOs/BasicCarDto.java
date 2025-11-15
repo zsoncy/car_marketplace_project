@@ -16,6 +16,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class BasicCarDto {
+    private Long id;
     private String vin;
     private String make;
     private String model;

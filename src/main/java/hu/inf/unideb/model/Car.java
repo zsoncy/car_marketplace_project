@@ -16,6 +16,10 @@ public class Car {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(unique = true)
     private String vin;
 
     private String make;

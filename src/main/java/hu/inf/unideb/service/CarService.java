@@ -28,12 +28,12 @@ public class CarService {
     }
 
     //READ - Get by ID
-    public BasicCarDto getCarById(String vin) {
+    public BasicCarDto getCarById(Long id) {
         return carRepo
-                .findById(vin)
+                .findById(id)
                 .map(basicCarDtoConverter::convertCarToBasicCarDto)
                 .orElseThrow(() -> new RuntimeException
-                        ("Car not found with the identification number: " + vin));
+                        ("Car not found with id: " + id));
     }
 
     //READ - Get all cars
@@ -46,9 +46,9 @@ public class CarService {
     }
 
     //UPDATE
-    public BasicCarDto updateCar(String vin, BasicCarDto updatedCar){
+    public BasicCarDto updateCar(Long id, BasicCarDto updatedCar){
 
-        var existingCar = carRepo.findById(vin).orElseThrow(
+        var existingCar = carRepo.findById(id).orElseThrow(
                 ()-> new RuntimeException("Car not found")
         );
 
@@ -68,11 +68,11 @@ public class CarService {
         return updatedCar;
     }
 
-    public void deleteCar(String vin) {
-        if (!carRepo.existsById(vin)) {
-            throw new RuntimeException("Car not found with the identification number: " + vin);
+    public void deleteCar(Long id) {
+        if (!carRepo.existsById(id)) {
+            throw new RuntimeException("Car not found with id: " + id);
         }
-        carRepo.deleteById(vin);
+        carRepo.deleteById(id);
     }
 
 
