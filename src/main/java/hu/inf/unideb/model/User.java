@@ -18,6 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
 
+
     @Column(nullable = false, unique = true)
     private String username;
 
@@ -27,6 +28,12 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Car> cars;
+
+    public void addCar(Car car){
+        car.setUser(this);
+        cars.add(car);
+    }
+
 
 }
 

@@ -1,6 +1,6 @@
 package hu.inf.unideb.DTOs;
 
-import jakarta.persistence.Cache;
+import hu.inf.unideb.model.Car;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,5 +16,5 @@ public class BasicUserDto {
     private Long userId;
     private String username;
     private String password;
-    private List<Cache> cars;
+    private List<Car> cars;
 }
