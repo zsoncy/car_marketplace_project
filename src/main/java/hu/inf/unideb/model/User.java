@@ -29,9 +29,17 @@ public class User {
     @JsonManagedReference
     private List<Car> cars;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     public void addCar(Car car){
         car.setUser(this);
         cars.add(car);
+    }
+
+    public void removeCar(Car car){
+        car.setUser(null);
+        cars.remove(car);
     }
 
 
