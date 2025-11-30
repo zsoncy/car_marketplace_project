@@ -1,6 +1,7 @@
 package hu.inf.unideb.DTOs;
 
 import hu.inf.unideb.model.Car;
+import hu.inf.unideb.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +18,5 @@ public class BasicUserDto {
     private String username;
     private String password;
     private List<Car> cars;
+    private Role role;
 }
