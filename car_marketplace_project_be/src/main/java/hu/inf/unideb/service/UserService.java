@@ -40,7 +40,7 @@ public class UserService {
     public BasicUserDto updateUser(Long id, BasicUserDto updatedUser) {
         var existingUser = getUserById(id);
         existingUser.setUsername(updatedUser.getUsername());
-        existingUser.setPassword(updatedUser.getPassword());
+        existingUser.setRole(updatedUser.getRole());
         saveUser(existingUser);
         return existingUser;
     }
