@@ -51,33 +51,43 @@ public class CarService {
     }
 
     //UPDATE
-    public BasicCarDto updateCar(Long id, BasicCarDto updatedCar){
+    public BasicCarDto updateCar(Long id, BasicCarDto updatedCar, HttpServletRequest request){
 
         var existingCar = carRepo.findById(id).orElseThrow(
                 ()-> new RuntimeException("Car not found")
         );
 
-        existingCar.setMake(updatedCar.getMake());
-        existingCar.setModel(updatedCar.getModel());
-        existingCar.setYear(updatedCar.getYear());
-        existingCar.setFuel(updatedCar.getFuel());
-        existingCar.setTransmission(updatedCar.getTransmission());
-        existingCar.setEngine_size(updatedCar.getEngine_size());
-        existingCar.setImages_src(updatedCar.getImages_src());
-        existingCar.setPrice(updatedCar.getPrice());
-        existingCar.setDescription(updatedCar.getDescription());
-        existingCar.setUser(updatedCar.getUser());
+        var user = getUserFromRequest(request);
+        if (checkOwnerShip(user.getUsername(),existingCar)) {
+            existingCar.setMake(updatedCar.getMake());
+            existingCar.setModel(updatedCar.getModel());
+            existingCar.setYear(updatedCar.getYear());
+            existingCar.setFuel(updatedCar.getFuel());
+            existingCar.setTransmission(updatedCar.getTransmission());
+            existingCar.setEngine_size(updatedCar.getEngine_size());
+            existingCar.setImages_src(updatedCar.getImages_src());
+            existingCar.setPrice(updatedCar.getPrice());
+            existingCar.setDescription(updatedCar.getDescription());
 
-        carRepo.save(existingCar);
 
-        return updatedCar;
+            carRepo.save(existingCar);
+
+            return updatedCar;
+
+        }else {
+            throw new RuntimeException(
+                    "You are not the owner of the car, or don't have permission to edit the car"
+            );        }
     }
 
-    public void deleteCar(Long id) {
-        if (!carRepo.existsById(id)) {
-            throw new RuntimeException("Car not found with id: " + id);
+    public void deleteCar(Long id,HttpServletRequest request) {
+        var carToDelete = carRepo.findById(id).orElseThrow(() -> new RuntimeException("Car was not found"));
+        var user = getUserFromRequest(request);
+        if (checkOwnerShip(user.getUsername(),carToDelete)){
+            carRepo.deleteById(id);
+        }else {
+            throw new RuntimeException("The delete was not successful");
         }
-        carRepo.deleteById(id);
     }
 
     public List<BasicCarDto> getUserCar(HttpServletRequest request) {

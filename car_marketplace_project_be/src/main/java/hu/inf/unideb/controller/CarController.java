@@ -35,13 +35,15 @@ public class CarController {
 
     @PutMapping("/{id}")
     public ResponseEntity<BasicCarDto> updateCar(@NonNull @PathVariable Long id,
-                                                       @NonNull @RequestBody BasicCarDto updateCar) {
-        return ResponseEntity.ok(carService.updateCar(id, updateCar));
+                                                       @NonNull @RequestBody BasicCarDto updateCar,
+                                                 HttpServletRequest request) {
+
+        return ResponseEntity.ok(carService.updateCar(id, updateCar,request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCar(@NonNull @PathVariable Long id) {
-        carService.deleteCar(id);
+    public ResponseEntity<String> deleteCar(@NonNull @PathVariable Long id,HttpServletRequest request) {
+        carService.deleteCar(id,request);
         return ResponseEntity.ok("Car with id:" + id + "has been deleted");
     }
 
