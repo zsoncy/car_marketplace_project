@@ -5,17 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efc91280-4e5e-44a4-9bf8-45b30dd70bbf" name="Changes" comment="implementing UNIT TEST methods for the Auth Service">
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/inf/unideb/CarMarketplaceAppContextTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/inf/unideb/controller/AuthControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/inf/unideb/controller/CarControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/inf/unideb/controller/UserControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/inf/unideb/converters/BasicCarDtoConverterTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/inf/unideb/converters/BasicUserDtoConverterTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/inf/unideb/service/CustomUserDetailServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/inf/unideb/service/JWTServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/inf/unideb/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/inf/unideb/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/eslint.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/nginx.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/postcss.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/App.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/Stores/UserStore.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/Types/Car.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/Types/FormTypes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/Types/User.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/assets/react.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Admin/DisplayUsers.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Admin/User.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Admin/UserEditForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Admin/Users.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Auth/LoginForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Auth/RegisterForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Car/Car.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Car/CarElement.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Car/CarPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Car/DisplayCars.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Car/MyCars.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Car/PostCarForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Car/UpdateCarForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Homepage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Navbar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/main.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/service/AdminService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/service/AuthServices.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/service/CarService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/service/useLogOut.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/styles/Auth/AuthForm.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/styles/Homepage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/styles/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/tailwind.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/tsconfig.node.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +62,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -57,34 +88,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.All in demo.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.CarServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.hu.inf.unideb.service in demo.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Spring Boot.CarMarketplaceApp.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/de ik pti/5. felev/car_marketplace_project/car_marketplace_project_be&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.All in demo.executor": "Run",
+    "JUnit.CarServiceTest.executor": "Run",
+    "JUnit.UserServiceTest.executor": "Run",
+    "JUnit.hu.inf.unideb.service in demo.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.CarMarketplaceApp.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/de ik pti/5. felev/car_marketplace_project/car_marketplace_project_be",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="JUnit.All in demo">
+}]]></component>
+  <component name="RunManager" selected="Spring Boot.CarMarketplaceApp">
     <configuration name="All in demo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="demo" />
       <option name="PACKAGE_NAME" value="" />
@@ -173,7 +204,7 @@
       <workItem from="1763248713940" duration="2081000" />
       <workItem from="1763493094879" duration="47000" />
       <workItem from="1764532168370" duration="7247000" />
-      <workItem from="1765107121431" duration="4234000" />
+      <workItem from="1765107121431" duration="8660000" />
     </task>
     <task id="LOCAL-00001" summary="setting up the PostgreSQL database using docker">
       <option name="closed" value="true" />
