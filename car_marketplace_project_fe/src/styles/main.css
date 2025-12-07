@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-size: 16px;
+    background: linear-gradient(180deg,rgba(30, 41, 57, 1) 0%, rgba(44, 66, 120, 1) 80%, rgba(58, 90, 156, 1) 100%) no-repeat fixed;
+    background-size: cover;
+}
+
+@media (max-width: 1200px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 900px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    html {
+        font-size: 8px;
+    }
+}
