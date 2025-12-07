@@ -29,4 +29,5 @@ public class BasicCarDto {
     private String description;
     @JsonIgnore
     private User user;
+    private String username;
 }

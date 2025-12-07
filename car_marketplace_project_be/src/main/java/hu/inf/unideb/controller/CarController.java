@@ -2,6 +2,7 @@ package hu.inf.unideb.controller;
 
 import hu.inf.unideb.DTOs.BasicCarDto;
 import hu.inf.unideb.service.CarService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.springframework.http.ResponseEntity;
@@ -42,5 +43,10 @@ public class CarController {
     public ResponseEntity<String> deleteCar(@NonNull @PathVariable Long id) {
         carService.deleteCar(id);
         return ResponseEntity.ok("Car with id:" + id + "has been deleted");
+    }
+
+    @GetMapping("/myCars")
+    public ResponseEntity<List<BasicCarDto>> userCars(HttpServletRequest request) {
+        return ResponseEntity.ok(carService.getUserCar(request));
     }
 }
