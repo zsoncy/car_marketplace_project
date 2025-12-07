@@ -37,11 +37,6 @@ public class User {
         cars.add(car);
     }
 
-    public void removeCar(Car car){
-        car.setUser(null);
-        cars.remove(car);
-    }
-
 
 }
 
