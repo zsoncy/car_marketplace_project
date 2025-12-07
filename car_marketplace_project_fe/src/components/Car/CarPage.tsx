@@ -54,10 +54,10 @@ export default function CarPage() {
                 {title}
             </h1>
 
-            <div className={"flex justify-center mb-3"}>
+            <div className={"flex justify-center mx-40 mb-5"}>
                 <img
                     className={
-                        "h-120 w-80 transition delay-150 duration-300 ease-in-out hover:scale-130"
+                        "transition delay-150 duration-300 ease-in-out hover:scale-130"
                     }
                     src={coverSrc}
                     alt={`${title} (${data.year})`}

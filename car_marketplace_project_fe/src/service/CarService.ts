@@ -101,3 +101,19 @@ export const deleteCar = async (accessToken: string, id: number) => {
         );
     }
 };
+
+
+// ------------- GetUserCars -------------
+export const getUserCar = async (accessToken: string) => {
+    const res = await fetch("/api/cars/myCars", {
+        headers: {Authorization: `Bearer ${accessToken}`},
+    });
+    if (res.ok) {
+        const response = await res.json();
+        console.log(response);
+        return response;
+    } else {
+        const message = await res.text();
+        throw new Error(message || "Request could not be completed");
+    }
+}

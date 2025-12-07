@@ -2,7 +2,7 @@ import { userStore } from "../../Stores/UserStore.ts";
 import { type MouseEventHandler, useEffect, useState } from "react";
 import type { carType } from "../../Types/Car.ts";
 import { useQuery } from "@tanstack/react-query";
-import { getAllCars } from "../../service/CarService.ts";
+import {getUserCar} from "../../service/CarService.ts";
 import { toast } from "react-toastify";
 import PostCarForm from "./PostCarForm.tsx";
 import UpdateCarForm from "./UpdateCarForm.tsx";
@@ -21,12 +21,7 @@ export default function MyCars() {
             if (!currentUser?.accessToken) {
                 throw new Error("Could not authenticate");
             }
-            // Fetch all cars, then filter by current user (until a /myCars endpoint exists)
-            const all = await getAllCars(currentUser.accessToken);
-            const username = currentUser.username;
-            return Array.isArray(all)
-                ? all.filter((c: carType) => c.username === username)
-                : [];
+            return await getUserCar(currentUser.accessToken);
         },
         enabled: !!currentUser?.accessToken,
     });

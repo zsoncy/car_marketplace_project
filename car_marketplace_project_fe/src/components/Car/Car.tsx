@@ -29,7 +29,7 @@ export default function Car(carProp: { carInfo: carType }) {
             </Link>
 
             <img
-                className={"h-80 w-55 mb-2 transition delay-150 duration-300 ease-in-out hover:scale-130"}
+                className={" mb-2 transition delay-150 duration-300 ease-in-out hover:scale-130"}
                 src={coverSrc}
                 alt={`${title} (${year})`}
             />
