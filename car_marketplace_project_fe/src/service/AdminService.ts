@@ -3,7 +3,7 @@
 import type {UserResponse} from "../Types/User.ts";
 
 export const usersGetAll = async (accessToken:string) => {
-    const res = await fetch("/api/recipe/user",{
+    const res = await fetch("/api/users",{
         headers:{
             Authorization:`Bearer ${accessToken}`
         }
@@ -20,7 +20,7 @@ export const usersGetAll = async (accessToken:string) => {
 
 // ------------- Delete -------------
 export const userDelete = async (accessToken:string,id:number) =>{
-    const res = await fetch(`/api/recipe/user/${id}`,{
+    const res = await fetch(`/api/users/${id}`,{
         method:"DELETE",
         headers:{
             Authorization:`Bearer ${accessToken}`,
@@ -37,7 +37,7 @@ export const userDelete = async (accessToken:string,id:number) =>{
 // ------------- Update -------------
 
 export const userUpdate = async (accessToken:string, id:number, data:UserResponse)=> {
-    const res = await fetch(`/api/recipe/user/${id}`, {
+    const res = await fetch(`/api/users/${id}`, {
         method: "PUT",
         headers: {
             Authorization: `Bearer ${accessToken}`,

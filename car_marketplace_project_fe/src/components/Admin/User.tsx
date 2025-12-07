@@ -30,6 +30,7 @@ export default function User(prop:userProp){
         }
     })
 
+
     const handleDelete = (id:number) =>{
         deleteMutation.mutate(id);
     }
@@ -40,6 +41,8 @@ export default function User(prop:userProp){
     useEffect(() => {
         console.log(canDelete);
         console.log(isOwnUser);
+        console.log(userStore.getState().user);
+        console.log(prop.userInfo.user_id);
     });
 
     return(
