@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   postgres:
@@ -13,6 +12,21 @@ services:
       - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./
+    container_name: app_backend
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mydb
+      SPRING_DATASOURCE_USERNAME: myuser
+      SPRING_DATASOURCE_PASSWORD: mypass
+      # Optional: if Spring Boot uses application.properties, override host here
+    ports:
+      - "8080:8080"
+
 
 volumes:
   postgres-data:

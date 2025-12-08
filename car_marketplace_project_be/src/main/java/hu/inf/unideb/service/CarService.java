@@ -16,20 +16,25 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class CarService {
-    
+
     private CarRepo carRepo;
     private BasicCarDtoConverter basicCarDtoConverter;
     private JWTService jwtService;
     private UserRepo userRepo;
 
+
     //CREATE
-    public BasicCarDto createCar(BasicCarDto basicCarDto, String username) {
-        var owner = userRepo.findByUsername(username);
-        System.out.println(owner);
+    public BasicCarDto createCar(BasicCarDto basicCarDto,HttpServletRequest request) {
+        System.out.println(basicCarDto);
+        var owner = getUserFromRequest(request);
         var carToSave = basicCarDtoConverter.convertBasicCarDtoToCar(basicCarDto);
         owner.addCar(carToSave);
         carRepo.save(carToSave);
         return basicCarDto;
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepo.findByUsername(username);
     }
 
     //READ - Get by ID
@@ -102,7 +107,7 @@ public class CarService {
                 .toList();
     }
 
-    private User getUserFromRequest(HttpServletRequest request) {
+    User getUserFromRequest(HttpServletRequest request) {
         var tokenFromRequest = jwtService.extractTokenFromRequest(request);
         var username = jwtService.getUsernameFromToken(tokenFromRequest);
         return userRepo.findByUsername(username);

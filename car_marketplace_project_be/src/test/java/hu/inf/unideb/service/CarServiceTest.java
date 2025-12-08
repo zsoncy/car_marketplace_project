@@ -5,17 +5,17 @@ import hu.inf.unideb.converter.BasicCarDtoConverter;
 import hu.inf.unideb.model.*;
 import hu.inf.unideb.repository.CarRepo;
 import hu.inf.unideb.repository.UserRepo;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockHttpServletRequest;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,25 +36,42 @@ public class CarServiceTest {
     @Mock
     private UserRepo userRepo;
 
+    @Mock
+    private JWTService jwtService;
+
+    @Mock
+    private HttpServletRequest request;
+
     @InjectMocks
     private CarService carService;
 
     @Captor
     private ArgumentCaptor<Car> carCaptor;
 
+
+
     // CREATE CAR TESTS
     @Test
     void createCar_correctCar_created() {
-
         // Arrange
         String username = "random_user_01";
+
+        // --- create a spy of the service so we can stub getUserFromRequest(...) ---
+        CarService serviceSpy = spy(carService);
+
+        // mock request (we don't care what's inside, because we stub getUserFromRequest)
+        HttpServletRequest request = mock(HttpServletRequest.class);
+
+        // Owner that the service should use
         User owner = new User();
         owner.setUsername(username);
         owner.setPassword("123456789");
         owner.setRole(Role.USER);
         owner.setCars(new ArrayList<>());
-        userRepo.save(owner);
+        // if your test previously relied on saving this, you can keep it; it's not required though:
+        // userRepo.save(owner);
 
+        // DTO to create
         BasicCarDto carToCreate = new BasicCarDto();
         carToCreate.setVin("VIN-123456789");
         carToCreate.setMake("Toyota");
@@ -68,6 +85,7 @@ public class CarServiceTest {
         carToCreate.setDescription("Clean car, single owner.");
         carToCreate.setUser(owner);
 
+        // Entity produced by the converter
         Car converted = new Car();
         converted.setVin("VIN-123456789");
         converted.setMake("Toyota");
@@ -81,13 +99,16 @@ public class CarServiceTest {
         converted.setDescription("Clean car, single owner.");
         converted.setUser(owner);
 
-        when(userRepo.findByUsername(username)).thenReturn(owner);
+        // --- critical stubbing: bypass internal username extraction & repo lookup ---
+        doReturn(owner).when(serviceSpy).getUserFromRequest(request);
+
+        // the converter behavior
         when(basicCarDtoConverter.convertBasicCarDtoToCar(carToCreate)).thenReturn(converted);
 
         // Act
-        BasicCarDto createdCar = carService.createCar(carToCreate, username);
+        BasicCarDto createdCar = serviceSpy.createCar(carToCreate, request);
 
-        // Assert
+        // Assert (service currently returns the same DTO)
         assertNotNull(createdCar);
         assertEquals("VIN-123456789", createdCar.getVin());
         assertEquals("Toyota", createdCar.getMake());
@@ -101,27 +122,35 @@ public class CarServiceTest {
         assertEquals("Clean car, single owner.", createdCar.getDescription());
         assertEquals(owner, createdCar.getUser());
 
-        verify(userRepo, times(1)).findByUsername(username);
+        // Verify we converted & saved the entity
         verify(basicCarDtoConverter, times(1)).convertBasicCarDtoToCar(carToCreate);
         verify(carRepo, times(1)).save(carCaptor.capture());
 
-        Car capturedCar = carCaptor.getValue();
-        assertEquals("VIN-123456789", capturedCar.getVin());
-        assertEquals("Toyota", capturedCar.getMake());
-        assertEquals("Corolla", capturedCar.getModel());
-        assertEquals(2020, capturedCar.getYear());
-        assertEquals(Fuel.PETROL, capturedCar.getFuel());
-        assertEquals(Transmission.MANUAL, capturedCar.getTransmission());
-        assertEquals(1598, capturedCar.getEngine_size());
-        assertEquals(List.of("http://example/pic1.jpg"), capturedCar.getImages_src());
-        assertEquals(4500, capturedCar.getPrice());
-        assertEquals("Clean car, single owner.", capturedCar.getDescription());
-        assertEquals(owner, capturedCar.getUser());
+        // Verify owner was updated and saved entity fields
+        Car saved = carCaptor.getValue();
+        assertEquals("VIN-123456789", saved.getVin());
+        assertEquals("Toyota", saved.getMake());
+        assertEquals("Corolla", saved.getModel());
+        assertEquals(2020, saved.getYear());
+        assertEquals(Fuel.PETROL, saved.getFuel());
+        assertEquals(Transmission.MANUAL, saved.getTransmission());
+        assertEquals(1598, saved.getEngine_size());
+        assertEquals(List.of("http://example/pic1.jpg"), saved.getImages_src());
+        assertEquals(4500, saved.getPrice());
+        assertEquals("Clean car, single owner.", saved.getDescription());
+        assertEquals(owner, saved.getUser());
+        assertTrue(owner.getCars().contains(saved));
+
+        // Since we stubbed getUserFromRequest to return the owner directly,
+        // there is no need to involve userRepo at all:
+        verifyNoInteractions(userRepo);
     }
+
+
+
 
     @Test
     void createCar_invalidUser_throwsException() {
-
         // Arrange
         BasicCarDto carToCreate = new BasicCarDto();
         carToCreate.setVin("VIN-000000001");
@@ -135,23 +164,26 @@ public class CarServiceTest {
         carToCreate.setPrice(5200);
         carToCreate.setDescription("Nice diesel civic.");
 
-        when(userRepo.findByUsername("invalid_username")).thenReturn(null);
+        // Minimal change: use a request instead of username
+        // This request has no user info, so getUserFromRequest(request) should return null
+        HttpServletRequest request = new MockHttpServletRequest();
 
         // Act + Assert
         assertThrows(NullPointerException.class, () ->
-                carService.createCar(carToCreate, "invalid_username")
+                carService.createCar(carToCreate, request)
         );
 
-        verify(userRepo, times(1)).findByUsername("invalid_username");
+        // Verify the car is not saved
         verify(carRepo, never()).save(any());
     }
+
 
     // GET CAR BY ID TESTS
     @Test
     void getCarById_correctId_returnCar() {
-
         // Arrange
         Long carId = 13L;
+
         Car carInRepo = new Car();
         carInRepo.setId(carId);
         carInRepo.setVin("VIN-ABC123");
@@ -216,10 +248,9 @@ public class CarServiceTest {
         verify(basicCarDtoConverter, never()).convertCarToBasicCarDto(any());
     }
 
-    // GET ALL CARS
+    // GET ALL CARS TESTS
     @Test
     void getAllCars_haveCars_returnCars() {
-
         // Arrange
         Car car1 = new Car();
         car1.setVin("VIN-111");
@@ -285,7 +316,6 @@ public class CarServiceTest {
 
     @Test
     void getAllCars_noCars_returnEmptyList() {
-
         // Arrange
         when(carRepo.findAll()).thenReturn(Collections.emptyList());
 
@@ -302,17 +332,18 @@ public class CarServiceTest {
     // UPDATE CAR TESTS
     @Test
     void updateCar_correctCar_updatedCar() {
-
         // Arrange
         Long carId = 42L;
+
+        User owner = new User();
+        owner.setUsername("owner_42");
+        owner.setRole(Role.USER);
 
         Car existingCar = new Car();
         existingCar.setId(carId);
         existingCar.setMake("Old Make");
         existingCar.setModel("Old Model");
-
-        User owner = new User();
-        owner.setUsername("owner_42");
+        existingCar.setUser(owner);
 
         BasicCarDto updatedDto = new BasicCarDto();
         updatedDto.setVin("VIN-424242");
@@ -329,8 +360,13 @@ public class CarServiceTest {
 
         when(carRepo.findById(carId)).thenReturn(Optional.of(existingCar));
 
+        // mocks for getUserFromRequest + checkOwnerShip
+        when(jwtService.extractTokenFromRequest(request)).thenReturn("token-42");
+        when(jwtService.getUsernameFromToken("token-42")).thenReturn("owner_42");
+        when(userRepo.findByUsername("owner_42")).thenReturn(owner);
+
         // Act
-        BasicCarDto result = carService.updateCar(carId, updatedDto);
+        BasicCarDto result = carService.updateCar(carId, updatedDto, request);
 
         // Assert
         assertEquals("New Make", result.getMake());
@@ -342,7 +378,6 @@ public class CarServiceTest {
 
     @Test
     void updateCar_noCarToUpdate_throwsException() {
-
         // Arrange
         Long invalidId = 404L;
         BasicCarDto updatedCar = new BasicCarDto();
@@ -354,10 +389,10 @@ public class CarServiceTest {
 
         // Act + Assert
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                carService.updateCar(invalidId, updatedCar)
+                carService.updateCar(invalidId, updatedCar, request)
         );
-
         assertEquals("Car not found", exception.getMessage());
+
         verify(carRepo, times(1)).findById(invalidId);
         verify(carRepo, never()).save(any());
     }
@@ -365,33 +400,167 @@ public class CarServiceTest {
     // DELETE CAR TESTS
     @Test
     void deleteCar_haveCarToDelete_carDeleted() {
-
         // Arrange
         Long carId = 10L;
-        when(carRepo.existsById(carId)).thenReturn(true);
+
+        User owner = new User();
+        owner.setUsername("user10");
+        owner.setRole(Role.USER);
+
+        Car car = new Car();
+        car.setId(carId);
+        car.setUser(owner);
+
+        when(carRepo.findById(carId)).thenReturn(Optional.of(car));
+
+        when(jwtService.extractTokenFromRequest(request)).thenReturn("token-10");
+        when(jwtService.getUsernameFromToken("token-10")).thenReturn("user10");
+        when(userRepo.findByUsername("user10")).thenReturn(owner);
 
         // Act
-        carService.deleteCar(carId);
+        carService.deleteCar(carId, request);
 
         // Assert
-        verify(carRepo, times(1)).existsById(carId);
+        verify(carRepo, times(1)).findById(carId);
         verify(carRepo, times(1)).deleteById(carId);
     }
 
     @Test
     void deleteCar_noCarToDelete_throwsException() {
-
         // Arrange
         Long carId = 99L;
-        when(carRepo.existsById(carId)).thenReturn(false);
+        when(carRepo.findById(carId)).thenReturn(Optional.empty());
 
         // Act + Assert
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                carService.deleteCar(carId)
+                carService.deleteCar(carId, request)
         );
-        assertEquals("Car not found with id: 99", exception.getMessage());
+        assertEquals("Car was not found", exception.getMessage());
 
-        verify(carRepo, times(1)).existsById(carId);
+        verify(carRepo, times(1)).findById(carId);
         verify(carRepo, never()).deleteById(any());
+    }
+
+
+    // AUTH TESTS
+    @Test
+    void getUserCar_authenticatedUser_returnsOnlyOwnCars() {
+        // Arrange
+        User alice = new User();
+        alice.setUsername("alice");
+        alice.setRole(Role.USER);
+
+        User bob = new User();
+        bob.setUsername("bob");
+        bob.setRole(Role.USER);
+
+        Car carA1 = new Car();
+        carA1.setVin("VIN-A1");
+        carA1.setUser(alice);
+
+        Car carB1 = new Car();
+        carB1.setVin("VIN-B1");
+        carB1.setUser(bob);
+
+        when(carRepo.findAll()).thenReturn(List.of(carA1, carB1));
+
+        BasicCarDto dtoA1 = new BasicCarDto();
+        dtoA1.setVin("VIN-A1");
+
+        BasicCarDto dtoB1 = new BasicCarDto();
+        dtoB1.setVin("VIN-B1");
+
+        when(basicCarDtoConverter.convertCarToBasicCarDto(carA1)).thenReturn(dtoA1);
+        when(basicCarDtoConverter.convertCarToBasicCarDto(carB1)).thenReturn(dtoB1);
+
+        when(jwtService.extractTokenFromRequest(request)).thenReturn("token-alice");
+        when(jwtService.getUsernameFromToken("token-alice")).thenReturn("alice");
+        when(userRepo.findByUsername("alice")).thenReturn(alice);
+
+        // Act
+        List<BasicCarDto> result = carService.getUserCar(request);
+
+        // Assert
+        assertEquals(1, result.size());
+        assertEquals("VIN-A1", result.get(0).getVin());
+        assertEquals("alice", result.get(0).getUsername());
+
+        verify(carRepo, times(1)).findAll();
+        verify(basicCarDtoConverter, times(2)).convertCarToBasicCarDto(any(Car.class));
+    }
+
+    @Test
+    void updateCar_notOwner_throwsException() {
+        // Arrange
+        Long carId = 55L;
+
+        User realOwner = new User();
+        realOwner.setUsername("real_owner");
+        realOwner.setRole(Role.USER);
+
+        User attacker = new User();
+        attacker.setUsername("attacker");
+        attacker.setRole(Role.USER);
+
+        Car existingCar = new Car();
+        existingCar.setId(carId);
+        existingCar.setUser(realOwner);
+
+        BasicCarDto updated = new BasicCarDto();
+        updated.setMake("Hacked Make");
+        updated.setModel("Hacked Model");
+
+        when(carRepo.findById(carId)).thenReturn(Optional.of(existingCar));
+
+        when(jwtService.extractTokenFromRequest(request)).thenReturn("token-attacker");
+        when(jwtService.getUsernameFromToken("token-attacker")).thenReturn("attacker");
+        when(userRepo.findByUsername("attacker")).thenReturn(attacker);
+
+        // Act + Assert
+        RuntimeException ex = assertThrows(RuntimeException.class, () ->
+                carService.updateCar(carId, updated, request)
+        );
+        assertEquals("You are not the owner of the car, or don't have permission to edit the car", ex.getMessage());
+
+        verify(carRepo, times(1)).findById(carId);
+        verify(carRepo, never()).save(any());
+    }
+
+    @Test
+    void updateCar_adminUser_canUpdate() {
+        // Arrange
+        Long carId = 77L;
+
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setRole(Role.ADMIN);
+
+        User owner = new User();
+        owner.setUsername("owner77");
+        owner.setRole(Role.USER);
+
+        Car existingCar = new Car();
+        existingCar.setId(carId);
+        existingCar.setUser(owner);
+
+        BasicCarDto updated = new BasicCarDto();
+        updated.setMake("Admin Make");
+        updated.setModel("Admin Model");
+        updated.setDescription("Updated by admin");
+
+        when(carRepo.findById(carId)).thenReturn(Optional.of(existingCar));
+
+        when(jwtService.extractTokenFromRequest(request)).thenReturn("token-admin");
+        when(jwtService.getUsernameFromToken("token-admin")).thenReturn("admin");
+        when(userRepo.findByUsername("admin")).thenReturn(admin);
+
+        // Act
+        BasicCarDto result = carService.updateCar(carId, updated, request);
+
+        // Assert
+        assertEquals("Admin Make", result.getMake());
+        assertEquals("Admin Model", result.getModel());
+        assertEquals("Updated by admin", result.getDescription());
+        verify(carRepo, times(1)).save(existingCar);
     }
 }

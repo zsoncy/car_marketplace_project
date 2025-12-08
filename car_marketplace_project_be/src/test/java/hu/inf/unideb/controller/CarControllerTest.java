@@ -3,8 +3,8 @@ package hu.inf.unideb.controller;
 
 import hu.inf.unideb.DTOs.BasicCarDto;
 import hu.inf.unideb.model.Fuel;
-import hu.inf.unideb.model.Transmission;
 import hu.inf.unideb.service.CarService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletRequest;
+
 
 import java.util.List;
 
@@ -27,10 +29,10 @@ class CarControllerTest {
     @InjectMocks
     private CarController carController;
 
+
     @Test
     void createCar_validRequest_returnsOkResponse() {
         // Arrange
-        String username = "gerzson";
         BasicCarDto requestDto = new BasicCarDto();
         requestDto.setMake("Honda");
         requestDto.setModel("Civic");
@@ -41,10 +43,12 @@ class CarControllerTest {
         responseDto.setModel("Civic");
         responseDto.setFuel(Fuel.PETROL);
 
-        when(carService.createCar(requestDto, username)).thenReturn(responseDto);
+        HttpServletRequest request = new MockHttpServletRequest();
+
+        when(carService.createCar(requestDto, request)).thenReturn(responseDto);
 
         // Act
-        ResponseEntity<BasicCarDto> response = carController.createCar(requestDto, username);
+        ResponseEntity<BasicCarDto> response = carController.createCar(requestDto, request);
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -52,7 +56,7 @@ class CarControllerTest {
         assertEquals("Honda", response.getBody().getMake());
         assertEquals("Civic", response.getBody().getModel());
         assertEquals(Fuel.PETROL, response.getBody().getFuel());
-        verify(carService, times(1)).createCar(requestDto, username);
+        verify(carService, times(1)).createCar(requestDto, request);
     }
 
     @Test

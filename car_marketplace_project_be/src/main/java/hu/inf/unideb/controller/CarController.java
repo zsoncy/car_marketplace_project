@@ -1,6 +1,7 @@
 package hu.inf.unideb.controller;
 
 import hu.inf.unideb.DTOs.BasicCarDto;
+import hu.inf.unideb.model.User;
 import hu.inf.unideb.service.CarService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -18,9 +19,14 @@ public class CarController {
 
 
     @PostMapping
-    public ResponseEntity<BasicCarDto> createCar(@NonNull @RequestBody BasicCarDto basicCarDto, @RequestParam String username) {
+    public ResponseEntity<BasicCarDto> createCar(@NonNull @RequestBody BasicCarDto basicCarDto, HttpServletRequest request) {
         System.out.println(basicCarDto);
-        return ResponseEntity.ok(carService.createCar(basicCarDto,username));
+        return ResponseEntity.ok(carService.createCar(basicCarDto, request));
+    }
+
+    @GetMapping("/u")
+    public ResponseEntity<User> getUser(@RequestParam String username) {
+        return ResponseEntity.ok(carService.getUserByUsername(username));
     }
 
     @GetMapping("/{id}")

@@ -7,6 +7,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface BasicUserDtoConverter {
+
     BasicUserDto convertUserToBasicUserDto(User user);
     @Mapping(target = "cars", ignore = true)
     User convertBasicUserDtoToUser(BasicUserDto basicUserDto);

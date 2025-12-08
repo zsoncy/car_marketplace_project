@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efc91280-4e5e-44a4-9bf8-45b30dd70bbf" name="Changes" comment="implementing UNIT TEST methods for the Auth Service">
-      <change beforePath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Admin/User.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Admin/User.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Admin/Users.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../car_marketplace_project_fe/src/service/AdminService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/service/AdminService.ts" afterDir="false" />
-    </list>
+    <list default="true" id="efc91280-4e5e-44a4-9bf8-45b30dd70bbf" name="Changes" comment="fixing major issues" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +15,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="Dockerfile" />
       </list>
     </option>
   </component>
@@ -37,6 +34,10 @@
     &quot;accountId&quot;: &quot;85062c92-a931-429c-a567-67596116ca6d&quot;
   }
 }</component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -49,33 +50,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.All in demo.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CarServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.hu.inf.unideb.service in demo.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Spring Boot.CarMarketplaceApp.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/de ik pti/5. felev/car_marketplace_project/car_marketplace_project_be&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.All in demo.executor": "Run",
+    "JUnit.CarServiceTest.executor": "Run",
+    "JUnit.UserServiceTest.executor": "Run",
+    "JUnit.hu.inf.unideb.service in demo.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.CarMarketplaceApp.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/de ik pti/5. felev/car_marketplace_project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Spring Boot.CarMarketplaceApp">
     <configuration name="All in demo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="demo" />
@@ -166,7 +167,8 @@
       <workItem from="1763493094879" duration="47000" />
       <workItem from="1764532168370" duration="7247000" />
       <workItem from="1765107121431" duration="8660000" />
-      <workItem from="1765141194546" duration="6907000" />
+      <workItem from="1765141194546" duration="20378000" />
+      <workItem from="1765223847460" duration="10421000" />
     </task>
     <task id="LOCAL-00001" summary="setting up the PostgreSQL database using docker">
       <option name="closed" value="true" />
@@ -312,7 +314,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764539277225</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fixing major issues">
+      <option name="closed" value="true" />
+      <created>1765232016091</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1765232016091</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,9 +358,10 @@
     <MESSAGE value="implementing UNIT TEST methods for the User Service" />
     <MESSAGE value="implementing UNIT TEST methods for the Car Service" />
     <MESSAGE value="implementing UNIT TEST methods for the Auth Service" />
-    <option name="LAST_COMMIT_MESSAGE" value="implementing UNIT TEST methods for the Auth Service" />
+    <MESSAGE value="fixing major issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing major issues" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/car_marketplace_project_be$All_in_demo.ic" NAME="All in demo Coverage Results" MODIFIED="1765113651197" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/car_marketplace_project_be$All_in_demo.ic" NAME="All in demo Coverage Results" MODIFIED="1765215812795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>
