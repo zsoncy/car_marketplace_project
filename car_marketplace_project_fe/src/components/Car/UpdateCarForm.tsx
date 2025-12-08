@@ -75,56 +75,75 @@ export default function UpdateCarForm(carToUpdate: {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={"flex fle gap-3 flex-wrap"}>
 
+
+
                         {/* Make */}
-                        <div className={"flex flex-col"}>
+                        <div className="flex flex-col gap-1">
+                            <label htmlFor="make" className="text-gray-800 text-sm font-semibold">
+                                Make
+                            </label>
                             <input
+                                id="make"
                                 {...register("make", {
                                     required: "Make is required",
                                     minLength: { value: 2, message: "Make must be at least 2 characters" },
                                 })}
                                 type="text"
                                 placeholder="Make"
-                                className={"border-2 bg-white text-center w-75"}
+                                className="border-2 bg-white text-center w-75 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                             {errors.make && (
-                                <div className={"text-[#600000] w-auto"}>{errors.make.message}</div>
+                                <div className="text-[#600000] text-sm">{errors.make.message}</div>
                             )}
                         </div>
 
                         {/* Model */}
-                        <div className={"flex flex-col"}>
+                        <div className="flex flex-col gap-1">
+                            <label htmlFor="model" className="text-gray-800 text-sm font-semibold">
+                                Model
+                            </label>
                             <input
+                                id="model"
                                 {...register("model", {
                                     required: "Model is required",
                                     minLength: { value: 1, message: "Model must be at least 1 character" },
                                 })}
                                 type="text"
                                 placeholder="Model"
-                                className={"border-2 bg-white text-center w-75"}
+                                className="border-2 bg-white text-center w-75 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                             {errors.model && (
-                                <div className={"text-[#600000]"}>{errors.model.message}</div>
+                                <div className="text-[#600000] text-sm">{errors.model.message}</div>
                             )}
                         </div>
 
                         {/* VIN */}
-                        <div className={"flex flex-col"}>
+                        <div className="flex flex-col gap-1">
+                            <label htmlFor="vin" className="text-gray-800 text-sm font-semibold">
+                                VIN
+                            </label>
                             <input
+                                id="vin"
                                 {...register("vin", {
                                     required: "VIN is required",
                                     minLength: { value: 8, message: "VIN seems too short" },
                                 })}
                                 type="text"
                                 placeholder="VIN"
-                                className={"border-2 bg-white text-center w-75"}
+                                className="border-2 bg-white text-center w-75 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                             {errors.vin && (
-                                <div className={"text-[#600000]"}>{errors.vin.message}</div>
+                                <div className="text-[#600000] text-sm">{errors.vin.message}</div>
                             )}
                         </div>
 
+
+
                         {/* Year */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="year" className="text-gray-800 text-sm font-semibold">
+                                Year
+                            </label>
                             <input
                                 {...register("year", {
                                     required: "Year is required",
@@ -143,6 +162,9 @@ export default function UpdateCarForm(carToUpdate: {
 
                         {/* Price */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="price" className="text-gray-800 text-sm font-semibold">
+                                Price
+                            </label>
                             <input
                                 {...register("price", {
                                     required: "Price is required",
@@ -160,6 +182,9 @@ export default function UpdateCarForm(carToUpdate: {
 
                         {/* Engine size */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="engine_size" className="text-gray-800 text-sm font-semibold">
+                                Engine Size (cc)
+                            </label>
                             <input
                                 {...register("engine_size", {
                                     required: "Engine size is required",
@@ -177,6 +202,9 @@ export default function UpdateCarForm(carToUpdate: {
 
                         {/* Description */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="description" className="text-gray-800 text-sm font-semibold">
+                                Description
+                            </label>
                             <input
                                 {...register("description", {
                                     required: "Description is required",
@@ -192,10 +220,10 @@ export default function UpdateCarForm(carToUpdate: {
                         </div>
 
                         {/* Fuel */}
-                        <label className={"pt-1"}>Choose fuel: </label>
+                        <label className={"pt-1 mt-4"}>Choose fuel: </label>
                         <select
                             {...register("fuel", { required: true })}
-                            className={"bg-white border-2 h-8"}
+                            className={"bg-white border-2 min-h-8 mt-4"}
                         >
                             <option value="PETROL">Petrol</option>
                             <option value="DIESEL">Diesel</option>
@@ -204,10 +232,10 @@ export default function UpdateCarForm(carToUpdate: {
                         </select>
 
                         {/* Transmission */}
-                        <label className={"pt-1"}>Choose transmission: </label>
+                        <label className={"pt-1 mt-4"}>Choose transmission: </label>
                         <select
                             {...register("transmission", { required: true })}
-                            className={"bg-white border-2 h-8"}
+                            className={"bg-white border-2 min-h-8 mt-4"}
                         >
                             <option value="MANUAL">Manual</option>
                             <option value="AUTOMATIC">Automatic</option>
@@ -215,6 +243,9 @@ export default function UpdateCarForm(carToUpdate: {
 
                         {/* Images (comma-separated) — controlled text input feeding string[] via setValue */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="images_src" className="text-gray-800 text-sm font-semibold">
+                                Images (comma separated)
+                            </label>
                             <input
                                 type="text"
                                 placeholder="Image URLs (comma separated)"
@@ -237,7 +268,7 @@ export default function UpdateCarForm(carToUpdate: {
                         <button
                             type="submit"
                             className={
-                                "border-2 border-[#142040] rounded-2xl h-12 w-30 text-white bg-[#2C4278] transition delay-75 ease-in-out hover:bg-[#142040]"
+                                "border-2 ml-5 mt-3 border-[#142040] rounded-2xl h-12 w-30 text-white bg-[#2C4278] transition delay-75 ease-in-out hover:bg-[#142040]"
                             }
                         >
                             Update
@@ -246,7 +277,7 @@ export default function UpdateCarForm(carToUpdate: {
                         <button
                             type="button"
                             className={
-                                "border-2 border-[#400000] rounded-2xl h-12 w-30 text-white bg-[#800000] transition delay-75 ease-in-out hover:bg-[#400000]"
+                                "border-2 ml-5 mt-3 border-[#400000] rounded-2xl h-12 w-30 text-white bg-[#800000] transition delay-75 ease-in-out hover:bg-[#400000]"
                             }
                             onClick={carToUpdate.manageEditing}
                         >

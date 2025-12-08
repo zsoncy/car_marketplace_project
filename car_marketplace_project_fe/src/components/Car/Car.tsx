@@ -8,6 +8,7 @@ export default function Car(carProp: { carInfo: carType }) {
         model,
         year,
         fuel,
+        price,
         transmission,
         images_src,
         username,
@@ -18,26 +19,29 @@ export default function Car(carProp: { carInfo: carType }) {
     const title = `${make} ${model}`;
 
     return (
-        <div className={"flex flex-col w-60"}>
+        <div className={"flex flex-col border-2 border-[#2C4278] rounded-3xl p-5 w-60 min-h-96 mb-1 bg-[#2C4278]"}>
             <Link
                 to={`/dashboard/cars/${id}`}
                 className={
-                    "text-2xl text-white mb-3 transition delay-50 ease-in-out hover:text-[#3A5A9C]"
+                    "text-2xl text-white mb-3 text-center transition delay-50 ease-in-out hover:text-[#3A5A9C]"
                 }
             >
                 {title}
             </Link>
 
             <img
-                className={" mb-2 transition delay-150 duration-300 ease-in-out hover:scale-130"}
+                className={" my-2 transition delay-150 duration-300 ease-in-out hover:scale-110"}
                 src={coverSrc}
                 alt={`${title} (${year})`}
             />
 
-            <p className={"text-white"}>Year: {year}</p>
-            <p className={"text-white"}>Fuel: {fuel}</p>
-            <p className={"text-white"}>Transmission: {transmission}</p>
-            {username && <p className={"mb-2 text-white"}>Added by: {username}</p>}
+            <div className={"text-left text-white ml-3"}>
+            <p>Year: {year}</p>
+            <p>Fuel: {fuel}</p>
+            <p>Transmission: {transmission}</p>
+            {username && <p className={" text-white"}>Added by: {username}</p>}
+            <p className={"text-right font-bold mt-3"}>Price: {price}</p>
+            </div>
         </div>
     );
 }

@@ -16,7 +16,6 @@ export default function CarElement(carProp: {
         !!currentUser &&
         (currentUser.username === carProp.car.username || currentUser.role === "ADMIN");
 
-    const hasId = carProp.car.id != null;
 
     const deleteMutation = useMutation({
         mutationFn: (id: number) => {
@@ -48,32 +47,30 @@ export default function CarElement(carProp: {
     };
 
     return (
-        <div>
+        <div className={" text-center border-2 border-gray-800 rounded-4xl p-1 bg-gray-800"}>
             <Car carInfo={carProp.car} />
-            {hasId && (
+            {canEdit ? (
                 <button
                     className={
-                        "text-l border-2 rounded-2xl pl-1 pr-1 w-20 bg-red-800 " +
+                        "text-l border-2 rounded-2xl px-1 my-1 w-20 bg-red-800 " +
                         "text-white transition delay-50 ease-in-out hover:bg-red-500"
                     }
                     onClick={() => handleDelete(carProp.car.id!)}
                 >
                     Delete
                 </button>
-            )}
+            ) : (<></>)}
             {canEdit ? (
                 <button
                     className={
-                        "text-l border-2 rounded-2xl ml-10 pl-1 pr-1 w-20 bg-blue-800 " +
+                        "text-l border-2 rounded-2xl ml-7 my-1 px-1 w-20 bg-blue-800 " +
                         "text-white transition delay-50 ease-in-out hover:bg-blue-500"
                     }
                     onClick={() => carProp.setUpdating(carProp.car)}
                 >
                     Edit
                 </button>
-            ) : (
-                <></>
-            )}
+            ) : (<></>)}
         </div>
     );
 }

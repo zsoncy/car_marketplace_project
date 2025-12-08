@@ -97,12 +97,15 @@ export default function PostCarForm() {
             <div className={"border-t border-white w-[80%] m-auto mt-5 mb-10"}></div>
             <h1 className={"text-center text-white mr-10 text-3xl mb-10 "}>Add a new car</h1>
 
-            <div className={"flex border-2 rounded-2xl p-5 mb-10 pt-10 w-250 self-center bg-[#AFBEE3]"}>
+            <div className={"flex border-2 border-gray-800 rounded-2xl p-5 mb-10 pt-10 w-250 self-center bg-[#AFBEE3]"}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={"flex fle gap-3 flex-wrap"}>
 
                         {/* VIN */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="vin" className="text-gray-800 text-sm font-semibold">
+                                VIN
+                            </label>
                             <input
                                 {...register("vin", {
                                     required: "VIN is required",
@@ -117,6 +120,9 @@ export default function PostCarForm() {
 
                         {/* Make */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="make" className="text-gray-800 text-sm font-semibold">
+                                Make
+                            </label>
                             <input
                                 {...register("make", {
                                     required: "Make is required",
@@ -131,6 +137,9 @@ export default function PostCarForm() {
 
                         {/* Model */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="model" className="text-gray-800 text-sm font-semibold">
+                                Model
+                            </label>
                             <input
                                 {...register("model", {
                                     required: "Model is required",
@@ -147,6 +156,9 @@ export default function PostCarForm() {
 
                         {/* Year */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="year" className="text-gray-800 text-sm font-semibold">
+                                Year
+                            </label>
                             <input
                                 {...register("year", {
                                     required: "Year is required",
@@ -164,10 +176,10 @@ export default function PostCarForm() {
                         </div>
 
                         {/* Fuel */}
-                        <label className={"pt-1"}>Choose fuel: </label>
+                        <label className={"pt-1 mt-4"}>Choose fuel: </label>
                         <select
                             {...register("fuel", { required: true })}
-                            className={"bg-white border-2 h-8"}
+                            className={"bg-white border-2 h-8 mt-4"}
                         >
                             <option value="PETROL">Petrol</option>
                             <option value="DIESEL">Diesel</option>
@@ -176,10 +188,10 @@ export default function PostCarForm() {
                         </select>
 
                         {/* Transmission */}
-                        <label className={"pt-1"}>Choose transmission: </label>
+                        <label className={"pt-1 mt-4"}>Choose transmission: </label>
                         <select
                             {...register("transmission", { required: true })}
-                            className={"bg-white border-2 h-8"}
+                            className={"bg-white border-2 h-8 mt-4"}
                         >
                             <option value="MANUAL">Manual</option>
                             <option value="AUTOMATIC">Automatic</option>
@@ -187,6 +199,9 @@ export default function PostCarForm() {
 
                         {/* Engine size */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="engine_size" className="text-gray-800 text-sm font-semibold">
+                                Engine Size (cc)
+                            </label>
                             <input
                                 {...register("engine_size", {
                                     required: "Engine size is required",
@@ -204,6 +219,9 @@ export default function PostCarForm() {
 
                         {/* Price */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="price" className="text-gray-800 text-sm font-semibold">
+                                Price
+                            </label>
                             <input
                                 {...register("price", {
                                     required: "Price is required",
@@ -221,6 +239,9 @@ export default function PostCarForm() {
 
                         {/* Description */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="description" className="text-gray-800 text-sm font-semibold">
+                                Description
+                            </label>
                             <input
                                 {...register("description", {
                                     required: "Description is required",
@@ -237,6 +258,9 @@ export default function PostCarForm() {
 
                         {/* Images as comma-separated text; converted to images_src[] on submit */}
                         <div className={"flex flex-col"}>
+                            <label htmlFor="images_src" className="text-gray-800 text-sm font-semibold">
+                                Images (comma separated)
+                            </label>
                             <input
                                 {...register("images_text")}
                                 type="text"
@@ -253,7 +277,7 @@ export default function PostCarForm() {
                                 }}
                             />
                             {/* Optional helper text */}
-                            <small className="text-[#142040]">
+                            <small className="text-gray-800">
                                 {imagesCount > 0 ? `${imagesCount} image(s) detected` : "No images yet"}
                             </small>
                         </div>
@@ -262,7 +286,7 @@ export default function PostCarForm() {
                         <button
                             type="submit"
                             className={
-                                "border-2 border-[#142040] rounded-2xl h-12 w-30 text-white bg-[#2C4278] transition delay-75 ease-in-out hover:bg-[#142040]"
+                                "border-2 mt-3 ml-10 border-gray-800 rounded-2xl h-12 w-30 text-white bg-[#2C4278] transition delay-75 ease-in-out hover:bg-[#142040]"
                             }
                         >
                             Post
