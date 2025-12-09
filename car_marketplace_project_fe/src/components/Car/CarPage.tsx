@@ -39,8 +39,8 @@ function MainImage({ src, alt }: { src: string; alt: string }) {
                 style={{ transformOrigin: origin }}
                 className="
           block
-          transition delay-150 duration-300 ease-in-out
-          hover:scale-200
+          transition delay-150 max-h-150 duration-300 ease-in-out
+          hover:scale-150
           transform-gpu
           select-none
         "
@@ -110,7 +110,7 @@ export default function CarPage() {
 
     return (
         <div className={"flex flex-col text-3xl"}>
-            <h1 className={"text-6xl text-center text-white mb-8 mt-8"}>{title}</h1>
+            <h1 className={"text-6xl text-center text-white my-10"}>{title}</h1>
 
             {/* Main image — zoom follows cursor, clipped by wrapper */}
             <div className={"flex justify-center mx-40 mb-5"}>
@@ -155,8 +155,14 @@ export default function CarPage() {
                     Fuel: <strong className={"text-white font-bold"}>{data.fuel}</strong>
                 </p>
                 <p>
+                    Engine: <strong className={"text-white font-bold"}>{data.engine_size}</strong> cc
+                </p>
+                <p>
                     Transmission:{" "}
                     <strong className={"text-white font-bold"}>{data.transmission}</strong>
+                </p>
+                <p>
+                    VIN: <strong className={"text-white font-bold"}>{data.vin}</strong>
                 </p>
                 {typeof data.price === "number" && (
                     <p className={"text-right mr-40 mt-5"}>
@@ -166,13 +172,16 @@ export default function CarPage() {
                         </strong>
                     </p>
                 )}
+
                 {data.username && (
                     <p>
                         Added by:{" "}
                         <strong className={"text-white font-bold"}>{data.username}</strong>
                     </p>
                 )}
+
             </div>
+
 
             <div className={"border-t border-white w-[60%] m-auto mt-10"}></div>
 
@@ -182,6 +191,7 @@ export default function CarPage() {
                 </h2>
                 <p className={"text-white"}>{data.description}</p>
             </div>
+
         </div>
     );
 }

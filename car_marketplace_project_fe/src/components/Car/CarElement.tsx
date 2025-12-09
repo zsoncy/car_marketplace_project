@@ -49,6 +49,7 @@ export default function CarElement(carProp: {
     return (
         <div className={" text-center border-2 border-gray-800 rounded-4xl p-1 bg-gray-800"}>
             <Car carInfo={carProp.car} />
+            <div>
             {canEdit ? (
                 <button
                     className={
@@ -71,6 +72,7 @@ export default function CarElement(carProp: {
                     Edit
                 </button>
             ) : (<></>)}
+            </div>
         </div>
     );
 }

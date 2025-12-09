@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efc91280-4e5e-44a4-9bf8-45b30dd70bbf" name="Changes" comment="fixing major issues" />
+    <list default="true" id="efc91280-4e5e-44a4-9bf8-45b30dd70bbf" name="Changes" comment="fixing major issues">
+      <change beforePath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Car/CarPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Car/CarPage.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,7 +170,7 @@
       <workItem from="1764532168370" duration="7247000" />
       <workItem from="1765107121431" duration="8660000" />
       <workItem from="1765141194546" duration="20378000" />
-      <workItem from="1765223847460" duration="10421000" />
+      <workItem from="1765223847460" duration="10981000" />
     </task>
     <task id="LOCAL-00001" summary="setting up the PostgreSQL database using docker">
       <option name="closed" value="true" />

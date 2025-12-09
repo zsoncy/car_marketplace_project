@@ -16,7 +16,7 @@ export default function Navbar() {
 
             <nav className="relative bg-gray-800 text-white border-b border-white/10 h-[64px] px-[20px]">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full">
-                    <div className="flex h-full items-center justify-between relative">
+                    <div className="flex h-full ml-10 items-center justify-between relative">
                         {/* Menu button */}
                         <div className="flex sm:hidden">
                             <button
