@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: app_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypass
+    ports:
+      - "5432:5432"
+    volumes:
+      - car_marketplace_project_be_postgres-data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./car_marketplace_project_be
+    container_name: app_backend
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mydb
+      SPRING_DATASOURCE_USERNAME: myuser
+      SPRING_DATASOURCE_PASSWORD: mypass
+      # Optional: if Spring Boot uses application.properties, override host here
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./car_marketplace_project_fe
+    container_name: app_frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"    # external:internal
+    environment:
+      # Optional if your frontend uses env vars
+      VITE_API_URL: http://localhost:8080
+
+volumes:
+  car_marketplace_project_be_postgres-data:
+    external: true

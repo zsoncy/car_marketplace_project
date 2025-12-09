@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efc91280-4e5e-44a4-9bf8-45b30dd70bbf" name="Changes" comment="fixing major issues">
-      <change beforePath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Car/CarPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../car_marketplace_project_fe/src/components/Car/CarPage.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="efc91280-4e5e-44a4-9bf8-45b30dd70bbf" name="Changes" comment="fixing major issues" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,10 +34,10 @@
     &quot;accountId&quot;: &quot;85062c92-a931-429c-a567-67596116ca6d&quot;
   }
 }</component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -58,6 +56,7 @@
     "JUnit.CarServiceTest.executor": "Run",
     "JUnit.UserServiceTest.executor": "Run",
     "JUnit.hu.inf.unideb.service in demo.executor": "Run",
+    "JUnit.java in demo.executor": "Coverage",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -67,7 +66,7 @@
     "Spring Boot.CarMarketplaceApp.executor": "Run",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/de ik pti/5. felev/car_marketplace_project",
+    "last_opened_file_path": "D:/downloads/ml-llm-243.23654.266.2.zip",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -76,10 +75,11 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Spring Boot.CarMarketplaceApp">
+  <component name="RunManager" selected="JUnit.java in demo">
     <configuration name="All in demo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="demo" />
       <option name="PACKAGE_NAME" value="" />
@@ -132,6 +132,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="java in demo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CarMarketplaceApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="demo" />
@@ -142,6 +150,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.java in demo" />
         <item itemvalue="JUnit.All in demo" />
         <item itemvalue="JUnit.hu.inf.unideb.service in demo" />
         <item itemvalue="JUnit.CarServiceTest" />
@@ -152,8 +161,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+        <option value="bundled-jdk-9823dce3aa75-84258761d1cc-intellij.indexing.shared.core-IU-243.28141.18" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.28141.18" />
       </set>
     </attachedChunks>
   </component>
@@ -170,7 +179,9 @@
       <workItem from="1764532168370" duration="7247000" />
       <workItem from="1765107121431" duration="8660000" />
       <workItem from="1765141194546" duration="20378000" />
-      <workItem from="1765223847460" duration="10981000" />
+      <workItem from="1765223847460" duration="12492000" />
+      <workItem from="1765240361232" duration="190000" />
+      <workItem from="1765240564241" duration="882000" />
     </task>
     <task id="LOCAL-00001" summary="setting up the PostgreSQL database using docker">
       <option name="closed" value="true" />
